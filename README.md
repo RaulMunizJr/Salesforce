@@ -1,11 +1,11 @@
 # Salesforce
 
-#### Navigation
+### Navigation
 - PageReference: Object an action method returns with details of where user is navigated to.
 
 The sforce.one object provides the following functions. Reference the function using dotted notation from the sforce.one object. For example: sforce.one.navigateToSObject(...).
 ```
-Function	                      Description
+Function	                              Description
 back(​[refresh])	                                  Navigates to the previous state that’s saved in the sforce.one history. It’s equivalent to clicking a browser’s Back button.
 navigateToSObject(​recordId​[, view])	          Navigates to an sObject record, specified by recordId.
 navigateToURL(​url​[, isredirect])	          Navigates to the specified URL.
