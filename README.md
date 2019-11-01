@@ -16,3 +16,7 @@ Function	                              Description
   createRecord(​entityName​[, recordTypeId])	  Opens the page to create a new record for the specified entityName, for example, “Account” or “MyObject__c”.
   editRecord(​recordId)	                          Opens the page to edit the record specified by recordId.
 ```
+Static URLs
+In Visualforce markup, use ```{!URLFOR($Action.Contact.Edit, recordId)}```
+
+In JavaScript, use ```navigateToSObject(recordId)```
