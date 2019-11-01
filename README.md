@@ -20,3 +20,21 @@ Static URLs
 In Visualforce markup, use ```{!URLFOR($Action.Contact.Edit, recordId)}```
 
 In JavaScript, use ```navigateToSObject(recordId)```
+
+### Visual Design
+```
+<apex:page>
+    <style type="text/css">
+        .asideText { font-style: italic; }
+    </style>
+    <apex:outputText style="font-weight: bold;" 
+        value="This text is styled directly."/>
+    <apex:outputText styleClass="asideText" 
+        value="This text is styled via a stylesheet class."/>
+</apex:page>
+
+//************************************************************************
+
+//Add your own custom stylesheets to any Visualforce page using static resources and the <apex:stylesheet> tag.
+<apex:stylesheet value="{!$Resource.AppStylesheet}"/>
+```
