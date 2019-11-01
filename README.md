@@ -12,7 +12,7 @@ navigateToURL(​url​[, isredirect])	          Navigates to the specified URL.
 navigateToFeed(​subjectId, type)	                  Navigates to the feed of the specified type, scoped to the subjectId.
 navigateToFeedItemDetail(​feedItemId)	          Navigates to the specific feed item, feedItemId, and any associated comments.
 navigateToRelatedList(​relatedListId, parentRecordId)	Navigates to a related list for the parentRecordId.
-navigateToList(​listViewId​, listViewName, scope)	   Navigates to the list view that’s specified by the listViewId, which is the ID of the list view to be displayed.
-createRecord(​entityName​[, recordTypeId])	Opens the page to create a new record for the specified entityName, for example, “Account” or “MyObject__c”.
-editRecord(​recordId)	                        Opens the page to edit the record specified by recordId.
+navigateToList(​listViewId​, listViewName, scope)	  Navigates to the list view that’s specified by the listViewId, which is the ID of the list view to be displayed.
+createRecord(​entityName​[, recordTypeId])	  Opens the page to create a new record for the specified entityName, for example, “Account” or “MyObject__c”.
+editRecord(​recordId)	                          Opens the page to edit the record specified by recordId.
 ```
