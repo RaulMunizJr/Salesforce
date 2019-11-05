@@ -38,3 +38,18 @@ In JavaScript, use ```navigateToSObject(recordId)```
 //Add your own custom stylesheets to any Visualforce page using static resources and the <apex:stylesheet> tag.
 <apex:stylesheet value="{!$Resource.AppStylesheet}"/>
 ```
+//************************************************************************
+```
+Expense__c e = new Expense__c();
+e.amount__c = 250.11;
+e.client__c = '0013k00002d1MxX';//found in url
+e.date__c = system.today();
+
+insert e; //perform the insertion 'quickly'
+/*
+database.insert(e,);//useful for lists as well
+database.SaveResult dsr = datadatabase.insert(e,false); //returns fail if errors
+//,true all inserts must be true or non get inserted
+//,false only the true get inserted
+*/
+```
