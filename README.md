@@ -109,3 +109,49 @@ public with sharing class myTestClass {
     }
 }
 ```
+//******************************************************************************************
+```
+trigger account_Trigger on Account (after insert, after update) {
+	
+    if(trigger.isAfter && trigger.isInsert){
+        //apply classes here that will house appropriate methods
+        account_Methods.afterInsert(trigger.new);
+    }
+    else(trigger.isAfter && trigger.isUpdate){
+        //apply classes here that will house appropriate methods
+        account_Methods.afterUpdate(trigger.new, trigger.oldmap);
+        //trigger.new has the current record being processed by the database
+        //trigger.old has the old copy of it before this operation is taking place
+    }
+}
+
+/****************************************************************************************/
+public with sharing class account_Methods {
+    
+    public static void afterInsert(list<Account> newlist){
+        for(Account a : newlist){
+            
+        }
+    }
+    													//list<Account> oldlist
+    public static void afterUpdate(list<Account> newlist, map<id, Account> oldmap){
+        /*
+        for(integer i=0; i<newlist.size(); i++){
+            if(newlist[i].name != oldlist[i].name){
+                
+            }
+        }
+    //or
+    */
+        for(Account a : newlist){
+            Account oldAccount = oldmap.get(a.id);
+            
+            if(a.name != oldAccount.name){
+                
+            }
+        }
+        
+        
+    }
+}
+```
