@@ -53,3 +53,59 @@ database.SaveResult dsr = datadatabase.insert(e,false); //returns fail if errors
 //,false only the true get inserted
 */
 ```
+//*************************************************************************
+```
+public with sharing class myTestClass {
+ //Declartions****************************************   
+	object o;
+    integer i = (integer)o;
+    
+    myWrapper mw = new myWrapper();
+    
+    Account a = new Account();
+    sobject s;
+//Method delcations***********************************    
+    public static void myMethod(string myString){
+        
+//If/Else (No swith cases)****************************
+        if(){
+            
+        }
+        else if(){
+            
+        }
+        else {
+            
+        }
+        
+    }
+    
+//Loops***********************************************
+	list<Contact> contacts = new list<Contact>();
+    	
+    for(Contact iter : contacts){
+        
+    }
+    //or
+    for(integer i=0; i<contact.size(); i++){//preferred
+        
+    }
+    
+    while(){
+        
+    }
+    
+    do{
+        
+    } while();
+
+//Instances********************************************    
+    public class myWrapper{
+        string name;
+        
+        public myWrapper(){
+            name = '';
+        }
+    }
+}
+```
