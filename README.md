@@ -125,7 +125,7 @@ trigger account_Trigger on Account (after insert, after update) {
     }
 }
 
-/****************************************************************************************/
+/***********************************************/
 public with sharing class account_Methods {
     
     public static void afterInsert(list<Account> newlist){
@@ -152,6 +152,28 @@ public with sharing class account_Methods {
         }
         
         
+    }
+}
+/****************************************************************************************/
+public with sharing class expense_Methods {
+    
+    public static void afterUpsert(list<Expense__c> newlist){
+        for(Expense__c e : newlist){
+            AggregateResult ar = [select sum(amount__c)s from Expense__c where client__c = :e.client__c AND reimbursed__c = true]; //: denote using a merge
+            decimal value = double.valueof(ar.get('s'));
+            
+            Account a = new Account(id=e.client__c);
+            a.Total_Reimbursed_Expenses__c = value;
+            
+            update a;
+        }
+    }
+}
+/***********************************************/
+trigger expense_Trigger on Expense__c (after insert, after update) {
+    
+    if(trigger.isAfter && (trigger.isInsert || trigger.isUpdate)){
+        expense_Methods.afterUpsert(trigger.new);
     }
 }
 ```
