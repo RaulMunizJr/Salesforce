@@ -172,15 +172,11 @@ public with sharing class account_Methods {
 public with sharing class expense_Methods {
     
     public static void afterUpsert(list<Expense__c> newlist){
+       set<id> acctids = new set<id>();
         for(Expense__c e : newlist){
-            AggregateResult ar = [select sum(amount__c)s from Expense__c where client__c = :e.client__c AND reimbursed__c = true]; //: denote using a merge
-            decimal value = double.valueof(ar.get('s'));
-            
-            Account a = new Account(id=e.client__c);
-            a.Total_Reimbursed_Expenses__c = value;
-            
-            update a;
+            acctids.add(e.client__c);
         }
+        account_Methods.updateAccountTotalReimbursements(acctids);
     }
 }
 /***********************************************/
