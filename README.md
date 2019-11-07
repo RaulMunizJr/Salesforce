@@ -111,15 +111,12 @@ public with sharing class myTestClass {
 ```
 //******************************************************************************************
 ```
-trigger account_Trigger on Account (after insert, after update) {
+trigger account_Trigger on Account (after update) {
 	
-    if(trigger.isAfter && trigger.isInsert){
+
+    if(trigger.isAfter && trigger.isUpdate){
         //apply classes here that will house appropriate methods
-        account_Methods.afterInsert(trigger.new);
-    }
-    else(trigger.isAfter && trigger.isUpdate){
-        //apply classes here that will house appropriate methods
-        account_Methods.afterUpdate(trigger.new, trigger.oldmap);
+        account_Methods.afterUpdate(trigger.new, trigger.old);
         //trigger.new has the current record being processed by the database
         //trigger.old has the old copy of it before this operation is taking place
     }
@@ -127,22 +124,23 @@ trigger account_Trigger on Account (after insert, after update) {
 
 /***********************************************/
 public with sharing class account_Methods {
-    
+/*    
     public static void afterInsert(list<Account> newlist){
         for(Account a : newlist){
-            
+         //cant have expense inserted without an account   
         }
     }
-    							//list<Account> oldlist
-    public static void afterUpdate(list<Account> newlist, map<id, Account> oldmap){
-        /*
+*/    													//map<id, Account> oldmap
+    public static void afterUpdate(list<Account> newlist, list<Account> oldlist){
+        set<id> needUpdatedTotalReimbursements = new set<id>();
+        
         for(integer i=0; i<newlist.size(); i++){
-            if(newlist[i].name != oldlist[i].name){
-                
+            if(newlist[i].Total_Reimbursed_Expenses__c != oldlist[i].Total_Reimbursed_Expenses__c){
+                needUpdatedTotalReimbursements.add(newlist[i].id);
             }
         }
     //or
-    */
+    /*
         for(Account a : newlist){
             Account oldAccount = oldmap.get(a.id);
             
@@ -150,11 +148,27 @@ public with sharing class account_Methods {
                 
             }
         }
+    */    
+        if(!needUpdatedTotalReimbursements.isEmpty()){
+            updateAccountTotalReimbursements(needUpdatedTotalReimbursements);
+        } 
+    }
+    
+    
+    public static void updateAccountTotalReimbursements(set<id> acctids){
         
+        list<AggregateResult> arlist = [select sum(amount__c), client__c from Expense__c where reimbursed__c = true AND client__c IN :acctids GROUP BY client__c];
         
+        list<Account> accountUpdates = new list<Account>();
+        for(AggregateResult ar : arlist){
+            Account a = new Account(id=string.valueOf(ar.get('client__c')));
+            a.Total_Reimbursed_Expenses__c = double.valueof(ar.get('expr0'));
+            accountUpdates.add(a);
+        }
+        update accountUpdates;
     }
 }
-/****************************************************************************************/
+/*************************************************************************************************************************/
 public with sharing class expense_Methods {
     
     public static void afterUpsert(list<Expense__c> newlist){
