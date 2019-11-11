@@ -1,1 +1,21 @@
-Testing
+<apex:page sidebar="false" showheader="true">
+
+    <style>
+        .myclass{
+            font-weight:bold;
+            }
+     </style>
+  <h1>My Heading</h1>
+  <p class="myclass">This is so cool</p>
+  
+  {!IF(false,Today(),"Not today")} <!-- functions, google more built in functions -->
+  <!-- subs, contains, if, not, etc -->
+  {!$User.FirstName} <!-- Global Variables -->
+                                         <!-- mode="mainDetail" -->
+  <apex:pageBlock title="My Pageblock"  mode="edit">
+      <apex:pageBlockSection title="My Section">
+          
+      </apex:pageBlockSection>
+  </apex:pageBlock>
+  
+</apex:page>
