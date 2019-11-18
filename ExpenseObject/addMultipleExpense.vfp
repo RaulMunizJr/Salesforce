@@ -1,0 +1,28 @@
+<apex:page standardController="Account" extensions="addMultipleExpense_Extension" showHeader="true" sidebar="true">
+  <!--  <apex:sectionHeader title="Adding Expenses" subtitle="{!thisAccount.name}"/>  -->
+  <apex:form >
+    <apex:pageblock >
+        <apex:pageMessages id="msgs"/> <!-- allows to display messages to page for error, confirmation, info, etc.. -->
+        <apex:pageBlockButtons location="bottom">
+            <apex:commandButton value="Save Expenses" action="{!saveExpenses}" rerender="msgs, expenseTable"/>
+        </apex:pageBlockButtons>
+        <apex:pageBlockTable value="{!expenses}" var="e" id="expenseTable">
+            <!-- Id is used for rendering that specific part of the page -->
+            <apex:column headerValue="Amount">
+                <apex:inputField value="{!e.Amount__c}" rendered="{!NOT(e.Reimbursed__c)}"/> <!-- display inputfield if not reimbursed yet! -->
+                <apex:outputField value="{!e.Amount__c}" rendered="{!e.Reimbursed__c}"/> <!-- output if reimbursed.. -->
+                <apex:facet name="footer">
+                    <apex:commandButton value="Add New" action="{!addExpense}" rerender="expenseTable"/>
+                </apex:facet>
+            </apex:column>
+            <apex:column headerValue="Date">
+                <apex:inputField value="{!e.Date__c}"/>
+            </apex:column>
+            <apex:column headerValue="Reimbursed">
+                <apex:inputField value="{!e.Reimbursed__c}" rendered="{!NOT(e.Reimbursed__c)}"/>
+                <apex:outputField value="{!e.Reimbursed__c}" rendered="{!e.Reimbursed__c}"/>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageblock>
+  </apex:form>
+</apex:page>

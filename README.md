@@ -111,3 +111,43 @@ public with sharing class myTestClass {
 
 
 ```
+# VisualForcePages
+```
+<apex:page sidebar="false" showheader="true">
+
+    <style>
+        .myclass{
+            font-weight:bold;
+            }
+     </style>
+  <h1>My Heading</h1>
+  <p class="myclass">This is so cool</p>
+  
+  {!IF(false,Today(),"Not today")} <!-- functions, google more built in functions -->
+  <!-- subs, contains, if, not, etc -->
+  {!$User.FirstName} <!-- Global Variables -->
+                                         <!-- mode="mainDetail" -->
+  <apex:pageBlock title="My Pageblock"  mode="edit">
+      <apex:pageBlockSection title="My Section">
+          
+      </apex:pageBlockSection>
+  </apex:pageBlock>
+  
+</apex:page>
+
+<!------------------------------------------------------Columns Practice---------------------------------------------------------->
+<apex:page standardController="Account" recordSetVar="accounts">
+    <apex:pageBlock >
+        <apex:pageBlockTable value="{!accounts}" var="a">
+            <apex:column headerValue="Account Name">
+                <apex:outputField value="{!a.name}"/>
+            </apex:column>
+            
+            <apex:column headerValue="Created Date">
+                <apex:outputField value="{!a.createddate}"/>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
+
+```
