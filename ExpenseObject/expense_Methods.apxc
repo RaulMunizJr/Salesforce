@@ -1,0 +1,10 @@
+public with sharing class expense_Methods {
+    
+    public static void afterUpsert(list<Expense__c> newlist){
+       set<id> acctids = new set<id>();
+        for(Expense__c e : newlist){
+            acctids.add(e.client__c);
+        }
+        account_Methods.updateAccountTotalReimbursements(acctids);
+    }
+}

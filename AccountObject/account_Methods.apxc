@@ -1,0 +1,45 @@
+public with sharing class account_Methods {
+/*    
+    public static void afterInsert(list<Account> newlist){
+        for(Account a : newlist){
+         //cant have expense inserted without an account   
+        }
+    }
+*/    													//map<id, Account> oldmap
+    public static void afterUpdate(list<Account> newlist, list<Account> oldlist){
+        set<id> needUpdatedTotalReimbursements = new set<id>();
+        
+        for(integer i=0; i<newlist.size(); i++){
+            if(newlist[i].Total_Reimbursed_Expenses__c != oldlist[i].Total_Reimbursed_Expenses__c){
+                needUpdatedTotalReimbursements.add(newlist[i].id);
+            }
+        }
+    //or
+    /*
+        for(Account a : newlist){
+            Account oldAccount = oldmap.get(a.id);
+            
+            if(a.name != oldAccount.name){
+                
+            }
+        }
+    */    
+        if(!needUpdatedTotalReimbursements.isEmpty()){
+            updateAccountTotalReimbursements(needUpdatedTotalReimbursements);
+        } 
+    }
+    
+    
+    public static void updateAccountTotalReimbursements(set<id> acctids){
+        
+        list<AggregateResult> arlist = [select sum(amount__c), client__c from Expense__c where reimbursed__c = true AND client__c IN :acctids GROUP BY client__c];
+        
+        list<Account> accountUpdates = new list<Account>();
+        for(AggregateResult ar : arlist){
+            Account a = new Account(id=string.valueOf(ar.get('client__c')));
+            a.Total_Reimbursed_Expenses__c = double.valueof(ar.get('expr0'));
+            accountUpdates.add(a);
+        }
+        update accountUpdates;
+    }
+}
