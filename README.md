@@ -37,9 +37,9 @@ In JavaScript, use ```navigateToSObject(recordId)```
 
 //Add your own custom stylesheets to any Visualforce page using static resources and the <apex:stylesheet> tag.
 <apex:stylesheet value="{!$Resource.AppStylesheet}"/>
-```
+
 //************************************************************************
-```
+
 Expense__c e = new Expense__c();
 e.amount__c = 250.11;
 e.client__c = '0013k00002d1MxX';//found in url
@@ -53,7 +53,7 @@ database.SaveResult dsr = datadatabase.insert(e,false); //returns fail if errors
 //,false only the true get inserted
 */
 ```
-//*************************************************************************
+### Basic
 ```
 public with sharing class myTestClass {
  //Declartions****************************************   
@@ -108,8 +108,6 @@ public with sharing class myTestClass {
         }
     }
 }
-
-
 ```
 # VisualForcePages
 ```
