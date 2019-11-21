@@ -127,6 +127,7 @@ for(Integer i=0;i<colors.size();i++) {
     System.debug(colors[i]);
 }
 ```
+- https://developer.salesforce.com/docs/atlas.en-us.222.0.apexcode.meta/apexcode/langCon_apex_collections.htm
 # VisualForcePages
 ```
 <apex:page sidebar="false" showheader="true">
