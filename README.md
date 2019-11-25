@@ -170,5 +170,7 @@ for(Integer i=0;i<colors.size();i++) {
 ```
 - How to include a script
 ```
+"google hosted jquery" 2.x snippet -> copy & paste on top
+<apex:includeScript value=""/>
 <script src="{!URLFOR($Resource.resourcename, 'script.js')}">
 ```
