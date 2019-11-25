@@ -168,3 +168,7 @@ for(Integer i=0;i<colors.size();i++) {
 </apex:page>
 
 ```
+- How to include a script
+```
+<script src="{!URLFOR($Resource.resourcename, 'script.js')}">
+```
