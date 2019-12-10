@@ -5,13 +5,18 @@ public with sharing class account_Methods {
          //cant have expense inserted without an account   
         }
     }
-*/    													//map<id, Account> oldmap
+*/                                                      //map<id, Account> oldmap
     public static void afterUpdate(list<Account> newlist, list<Account> oldlist){
         set<id> needUpdatedTotalReimbursements = new set<id>();
+        set<id> needUpdatedGeocode = new set <id>();
         
         for(integer i=0; i<newlist.size(); i++){
             if(newlist[i].Total_Reimbursed_Expenses__c != oldlist[i].Total_Reimbursed_Expenses__c){
                 needUpdatedTotalReimbursements.add(newlist[i].id);
+            }
+            
+            if((newlist[i].billingstreet != oldlist[i].billingstreet) || (newlist[i].billingpostalcode != oldlist[i].billingpostalcode)){
+                needUpdatedGeocode.add(newlist[i].id);
             }
         }
     //or
@@ -27,6 +32,10 @@ public with sharing class account_Methods {
         if(!needUpdatedTotalReimbursements.isEmpty()){
             updateAccountTotalReimbursements(needUpdatedTotalReimbursements);
         } 
+        
+        if(!needUpdatedGeocode.isEmpty()){
+            util.geocode(needUpdatedGeocode);
+        }
     }
     
     

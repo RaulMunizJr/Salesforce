@@ -1,11 +1,15 @@
 <apex:page standardController="Account" extensions="addMultipleExpense_Extension" showHeader="true" sidebar="true">
   <!--  <apex:sectionHeader title="Adding Expenses" subtitle="{!thisAccount.name}"/>  -->
+    <script>function setFocusOnLoad(){}</script>
   <apex:form >
     <apex:pageblock >
         <apex:pageMessages id="msgs"/> <!-- allows to display messages to page for error, confirmation, info, etc.. -->
         <apex:pageBlockButtons location="bottom">
-            <apex:commandButton value="Save Expenses" action="{!saveExpenses}" rerender="msgs, expenseTable"/>
-        </apex:pageBlockButtons>
+            <apex:commandButton value="Save Expenses" action="{!saveExpenses}" rerender="msgs, expenseTable" onclick="if(!confirm('Reimbursed Expenses will be no longer editable.')) return false;"/>
+            <!-- button to replace above line when use with script at bottom..
+            <a onclick="processSave();" class="btn" style="text-decoration:none; padding: 3px 4px;>Save Expenses</a> 
+            -->
+            </apex:pageBlockButtons>
         <apex:pageBlockTable value="{!expenses}" var="e" id="expenseTable">
             <!-- Id is used for rendering that specific part of the page -->
             <apex:column headerValue="Amount">
@@ -19,10 +23,21 @@
                 <apex:inputField value="{!e.Date__c}"/>
             </apex:column>
             <apex:column headerValue="Reimbursed">
-                <apex:inputField value="{!e.Reimbursed__c}" rendered="{!NOT(e.Reimbursed__c)}"/>
+                <apex:inputField value="{!e.Reimbursed__c}" rendered="{!NOT(e.Reimbursed__c)}" onchange="alert('Reimbursed Expenses are no longer editable.');"/>
                 <apex:outputField value="{!e.Reimbursed__c}" rendered="{!e.Reimbursed__c}"/>
             </apex:column>
         </apex:pageBlockTable>
     </apex:pageblock>
+            <!-- For script below
+            <apex:actionfunction name="callControllerSaveExpenses" action="{!saveExpenses}" rerender="msgs, expenseTable"/>
+            -->
   </apex:form>
+            <!--
+            <script>
+                function processSave(){
+                    if(confirm('Reimbursed Expenses will be no longer editable.')){
+                        callControllerSaveExpenses();
+                    }
+           </script>
+             -->
 </apex:page>

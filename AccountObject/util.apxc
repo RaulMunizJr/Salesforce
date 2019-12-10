@@ -1,0 +1,43 @@
+public class util {
+    
+    @future(callout=true)
+    public static void geocode(set<id> scope){
+        
+        list<Account> alist = [select id, billingstreet, billingpostalcode, billinglatitude, billinglongitude from Account where id IN :scope];
+        
+        for(Account a : alist){
+            //placeholder for callout methods (later)
+        }
+        
+        update alist;
+    }
+    
+    public Messaging.SingleEmailMessage newEmail(string subject, list<string> toAdd, list<string> ccAdd, string htmlBody, boolean sendNow){
+        Messaging.SingleEmailMessage eml = new Messaging.SingleEmailMessage();
+        eml.setSubject(subject);
+        eml.setToAddresses(toAdd);
+        if(ccAdd != null) eml.setCcAddresses(ccAdd);
+        eml.setHtmlBody(htmlBody);
+        string plaintextbody = htmlBody.stripHTMLtags();
+        eml.setplaintextbody(plaintextbody);
+        
+        if(sendNow) sendEmail(new list <Messaging.SingleEmailMessage>{eml});
+        return eml;
+        /*
+        eml.setSenderDisplayName('batman');
+        eml.setReplyTo('test@test.com');
+        eml.setOrgWideEmailAddressId();
+		*/
+    }
+    
+    public static void sendEmail(list<Messaging.SingleEmailMessage> emls){
+        try{
+        Messaging.reserveSingleEmailCapacity(emls.size());
+        Messaging.sendEmail(emls);
+        }
+        catch(exception e){
+            system.debug('Error on: ' + e.getLineNumber() + ' ' +e.getMessage());
+        }
+    }
+
+}

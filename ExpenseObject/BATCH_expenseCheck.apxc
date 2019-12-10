@@ -1,0 +1,58 @@
+global class BATCH_expenseCheck implements Database.Batchable<sObject>, Schedulable{
+    
+    global final string queryString;
+    
+    global BATCH_expenseCheck() {
+        if(queryString == null) {
+            string temp = 'select ';//make sure to have a space
+            temp += 'id, all_expenses_reimbursed__c, ownerid from Account where all_expenses_reimbursed__c = false';
+            
+            queryString = temp;
+            system.debug(queryString);
+        }
+        
+    }
+    
+    global Database.QueryLocator start(Database.BatchableContext bc){
+        return Database.getQueryLocator(queryString);
+        
+    }
+    
+    global void execute(Database.BatchableContext bc, list<Account> scope){
+        processThis(scope);
+    }
+    
+    global static void processThis(list<Account> scope){
+        list<Task> tasklist = new list<Task>();
+        
+        for(Account a: scope){
+            Task t = new Task();
+            t.whatid = a.id;
+            t.ownerid = a.ownerid;
+            t.activitydate = system.today()+1; //one day to act on it
+            t.subject = 'This account has outstanding expenses.';
+            t.status = 'Not Started';
+            tasklist.add(t);
+        }
+        insert tasklist;
+    }
+    
+    global void finish(Database.BatchableContext bc){
+        //can be used to send email to notify BATCH is complete
+        //or start another queued process
+    }
+    
+    /*		First instantiate the BATCH,	Start the BATCH,	
+     * 		Run the execute method as many times as it takes to iterate through all records
+     * 		Run fish method once.
+     * 
+     * For Testing, open execute anonymous: BATCH_expensecheck job = new BATCH_expensecheck();
+	 *										Database.executeBatch(job);//200 default -> ,1 for one
+     */	
+    
+    global void execute(SchedulableContext sc){
+        BATCH_expenseCheck job = new BATCH_expensecheck();
+		Database.executeBatch(job);//200 default -> ,1 for one
+    }
+
+}
