@@ -41,3 +41,18 @@ switch on expression {       ex)     switch on num                              
   }
 }
 ```
+### Loops
+```
+while(i<=10)              for(integer i=1; i<=10; i++)
+{                         {
+  System.debug(i);            System.debug(i);
+  i++;                    }
+}
+
+for(variable : list_or_set) {       for(variable : [soql_query]){    ex)   List<String> empNames = new List<String>{'Raul','Harsh','Ali'};
+  //codeBlock                       //codeBlock
+}                                   }
+```
+
+
+
