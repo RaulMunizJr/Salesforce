@@ -50,8 +50,8 @@ while(i<=10)              for(integer i=1; i<=10; i++)
 }
 
 for(variable : list_or_set) {       for(variable : [soql_query]){    ex)   List<String> empNames = new List<String>{'Raul','Harsh','Ali'};
-  //codeBlock                       //codeBlock
-}                                   }
+  //codeBlock                       //codeBlock                             for(String empName:empNames){
+}                                   }                                           System.debug('Name= ' +empName); }
 ```
 
 
