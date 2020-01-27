@@ -29,15 +29,15 @@ else
 ```
 ### Switch Statements
 ```
-switch on expression {       ex)     switch on num
-  when value1{                       {
-    //code block1                       when 2{
-  }                                           system.debug('num is 2');
-  when value2{                          }
-    //code block2                       when else{
-  }                                               system.debug('num is neither');
-  when else {                           }
-    /codeblock3                       }
+switch on expression {       ex)     switch on num                                      switch on yourScore
+  when value1{                       {                                                  {
+    //code block1                       when 2{                                             when 85,90,95,100{
+  }                                           system.debug('num is 2');                         System.debug('first');
+  when value2{                          }                                                    }
+    //code block2                       when else{                                           .
+  }                                               system.debug('num is neither');            .
+  when else {                           }                                                    .
+    /codeblock3                       }                                                 }
   }
 }
 ```
