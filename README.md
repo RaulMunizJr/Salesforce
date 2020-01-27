@@ -1,0 +1,7 @@
+# Salesforce
+
+### Operators
+```
+|=  -> or
+&=  -> and
+```
