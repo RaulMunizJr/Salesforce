@@ -14,12 +14,30 @@ Datetime      ID            Object
 ```
 ### Conditional if else statements
 ```
-if(Boolean_condition)
+if(expression1)
 {
   //statement1
 }
-else
+else if(expression2)
 {
   //statement2
+}
+else
+{
+  //statement3
+}
+```
+### Switch Statements
+```
+switch on expression {       ex)     switch on num
+  when value1{                       {
+    //code block1                       when 2{
+  }                                           system.debug('num is 2');
+  when value2{                          }
+    //code block2                       when else{
+  }                                               system.debug('num is neither');
+  when else {                           }
+    /codeblock3                       }
+  }
 }
 ```
