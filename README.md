@@ -57,11 +57,12 @@ for(variable : list_or_set) {       for(variable : [soql_query]){    ex)   List<
 - Lists
 ```
 List<String> obj = new List<String>();      List<String> myStrings = new List<String> {'one','two'};      Integer[] myList = newList<Integer>{10,20,30};
-.add() or .add(index,name)                  .size()                                   .get()
+.add() or .add(index,name)                  .size()                                                       .get()
 .remove()                                   .sort()
 ```
-- Set
+- Set (no duplicates)
 ```
 Set<String> hset = new Set<String>();
+.add()
 ```
 
