@@ -63,6 +63,10 @@ List<String> obj = new List<String>();      List<String> myStrings = new List<St
 - Set (no duplicates)
 ```
 Set<String> hset = new Set<String>();
-.add()
+.add()                                      .size()
 ```
-
+- Map (key, value) [*Duplicates get overwitten]
+```
+Map<String,String> myStrings = new Map<String,String> {'a'=>'apple', 'b'=>'boy'};
+.put(k,v)                                   .size()
+```
