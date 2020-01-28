@@ -10,7 +10,7 @@ Datetime      ID            Object
 ### Operators
 ```
 |=  -> or (boolean)     ||  -> or
-&=  -> and  (boolean    &&  -> and
+&=  -> and  (boolean)    &&  -> and
 ```
 ### Conditional if else statements
 ```
@@ -53,6 +53,15 @@ for(variable : list_or_set) {       for(variable : [soql_query]){    ex)   List<
   //codeBlock                       //codeBlock                             for(String empName:empNames){
 }                                   }                                           System.debug('Name= ' +empName); }
 ```
-
-
+### Collections
+- Lists
+```
+List<String> obj = new List<String>();      List<String> myStrings = new List<String> {'one','two'};      Integer[] myList = newList<Integer>{10,20,30};
+.add() or .add(index,name)                  .size()                                   .get()
+.remove()                                   .sort()
+```
+- Set
+```
+Set<String> hset = new Set<String>();
+```
 
