@@ -70,3 +70,14 @@ Set<String> hset = new Set<String>();
 Map<String,String> myStrings = new Map<String,String> {'a'=>'apple', 'b'=>'boy'};
 .put(k,v)                                   .size()
 ```
+
+
+## Visualforce
+- SalesForce Apex Tags
+```
+<apex:page>                       <apex:pageBlockTable>          <apex:commandLink>
+<apex:form>                       <apex:pageBlockButtons>        <apex:outputPanel>
+<apex:pageBlock>                  <apex:inputField>              <apex:param>
+<apex:pageBlockSection>           <apex:outputField>             <apex:actionSupport>
+<apex:pageBlockSectionItem>       <apex:commandButton>           <apex:outputLink>
+```
