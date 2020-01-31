@@ -75,7 +75,7 @@ Map<String,String> myStrings = new Map<String,String> {'a'=>'apple', 'b'=>'boy'}
 ## Visualforce
 - SalesForce Apex Tags
 ```
-<apex:page>                       <apex:pageBlockTable>          <apex:commandLink>
+<apex:page>                       <apex:pageBlockTable>          <apex:commandLink>         <apex:panelGrid>
 <apex:form>                       <apex:pageBlockButtons>        <apex:outputPanel>
 <apex:pageBlock>                  <apex:inputField>              <apex:param>
 <apex:pageBlockSection>           <apex:outputField>             <apex:actionSupport>
