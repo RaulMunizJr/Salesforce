@@ -81,3 +81,21 @@ Map<String,String> myStrings = new Map<String,String> {'a'=>'apple', 'b'=>'boy'}
 <apex:pageBlockSection>           <apex:outputField>             <apex:actionSupport>
 <apex:pageBlockSectionItem>       <apex:commandButton>           <apex:outputLink>
 ```
+
+### SOQL
+```
+SELECT  Id, Name            SELECT  Id, Name
+FROM    Account             FROM    Account
+WHERE   Name='example'      WHERE   Phone!=null
+```
+- Comparison Operators
+```
+SELECT  AccountId, lastName   SELECT  Name            SELECT  Name
+FROM    Contact               FROM    Account         FROM    Account
+WHERE   lastName              WHERE   BillingState    WHERE   BillingState
+LIKE    'bo%'                 NOT In  ('NC','CA')     In      ('NC','CA')
+```
+- Logical Operators and Other
+```
+AND     OR      NOT           CreatedDate>      Order By  -ASC | DESC nulls last
+```
